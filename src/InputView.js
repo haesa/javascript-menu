@@ -7,8 +7,8 @@ const Validation = require('./Validation');
 class InputView {
   constructor() {}
 
-  inputCoach() {
-    Console.readLine(INPUT_MESSAGE.COACH_NAME, input => {
+  readCoaches() {
+    Console.readLine(INPUT_MESSAGE.COACH_NAME, (input) => {
       const names = input.split(',');
       const temp = [...names];
 
@@ -19,7 +19,7 @@ class InputView {
   }
 
   inputUnlikeMenu(temp, names, unlikeMenus) {
-    Console.readLine(INPUT_MESSAGE.FOOD_NAME(temp.shift()), input => {
+    Console.readLine(INPUT_MESSAGE.FOOD_NAME(temp.shift()), (input) => {
       const foods = input.split(',');
 
       Validation.food(foods);

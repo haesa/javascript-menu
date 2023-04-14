@@ -42,17 +42,23 @@ class Recommendation {
   }
 
   selectMenu(category, coach) {
-    const menus = MENUS[category];
-    const menusIndex = Array.from({ length: 9 }, (_, idx) => idx);
-
     while (true) {
-      const pickedMenu = menus[Random.shuffle(menusIndex)[0]];
+      const pickedMenu = this.shuffleMenu(MENUS[category])[0];
 
       if (!coach.isValidMenu(pickedMenu)) {
         coach.pushRecommendedMenu(pickedMenu);
         break;
       }
     }
+  }
+
+  shuffleMenu(menus) {
+    const indexArray = Array.from(
+      { length: menus.length },
+      (_, idx) => idx + 1
+    );
+    const shuffledArray = Random.shuffle(indexArray);
+    return shuffledArray.map((index) => menus[index - 1]);
   }
 }
 

@@ -19,23 +19,19 @@ class InputView {
   }
 
   readDislikeFood(temp, names, unlikeMenus) {
-    Console.readLine(INPUT_MESSAGE.FOOD_NAME(temp.shift()), (input) =>
-      this.setDislikeFood(input, { temp, names, unlikeMenus })
-    );
-  }
+    Console.readLine(INPUT_MESSAGE.FOOD_NAME(temp.shift()), (input) => {
+      const foods = input.split(',');
 
-  setDislikeFood(input, { temp, names, unlikeMenus }) {
-    const foods = input.split(',');
+      Validation.food(foods);
+      unlikeMenus.push(foods);
 
-    Validation.food(foods);
-    unlikeMenus.push(foods);
+      if (temp.length) {
+        this.readDislikeFood(temp, names, unlikeMenus);
+        return;
+      }
 
-    if (temp.length) {
-      this.readDislikeFood(temp, names, unlikeMenus);
-      return;
-    }
-
-    this.recommandMenu(names, unlikeMenus);
+      this.recommandMenu(names, unlikeMenus);
+    });
   }
 
   recommandMenu(names, unlikeMenus) {

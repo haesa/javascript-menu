@@ -28,11 +28,11 @@ class InputView {
     });
   }
 
-  recommandMenu(names, unlikeMenus) {
-    const recommendLists = Array.from({ length: unlikeMenus.length }, () =>
+  recommandMenu(names, dislikeFoods) {
+    const recommendLists = Array.from({ length: dislikeFoods.length }, () =>
       Array.from({ length: 0 })
     );
-    const recommendation = new Recommendation(recommendLists, unlikeMenus);
+    const recommendation = new Recommendation(recommendLists, dislikeFoods);
 
     for (let i = 0; i < 5; i++) {
       recommendation.recommend();

@@ -35,7 +35,7 @@ class Recommendation {
 
   selectMenu(category, { dislikeFoods, recommendedFoods }) {
     const menus = MENUS[category];
-    const menusIndex = menus.map((menu, index) => index);
+    const menusIndex = menus.map((_, index) => index);
 
     while (true) {
       const pickedMenu = menus[Random.shuffle(menusIndex)[0]];

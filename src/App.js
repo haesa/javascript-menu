@@ -16,7 +16,7 @@ class App {
   }
   play() {
     Console.print(SERVICE_MESSAGE.START);
-    this.inputView.readCoaches();
+    this.inputView.readCoachName();
   }
 }
 

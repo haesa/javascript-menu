@@ -7,7 +7,7 @@ const Validation = require('./Validation');
 class InputView {
   constructor() {}
 
-  readCoaches() {
+  readCoachName() {
     Console.readLine(INPUT_MESSAGE.COACH_NAME, (input) =>
       this.createCoaches(input)
     );

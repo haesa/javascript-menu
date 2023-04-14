@@ -35,10 +35,7 @@ class InputView {
 
   recommandMenu(coaches) {
     const recommendation = new Recommendation(coaches);
-
-    for (let i = 0; i < 5; i++) {
-      recommendation.recommend();
-    }
+    recommendation.recommend();
 
     const [results, categories] = recommendation.get();
 

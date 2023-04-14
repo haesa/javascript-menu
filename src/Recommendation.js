@@ -14,10 +14,12 @@ class Recommendation {
   }
 
   recommend() {
-    const category = this.getCategory();
-    this.pickedCategory.push(category);
+    for (let i = 0; i < 5; i++) {
+      const category = this.getCategory();
+      this.pickedCategory.push(category);
 
-    this.coaches.forEach((coach) => this.selectMenu(category, coach));
+      this.coaches.forEach((coach) => this.selectMenu(category, coach));
+    }
   }
 
   getCategory() {

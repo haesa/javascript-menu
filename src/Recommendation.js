@@ -38,23 +38,25 @@ class Recommendation {
     }
   }
 
-  selectMenu(category, { dislikeFoods, recommendedFoods }) {
+  selectMenu(category, coach) {
+    const { dislikeFoods, recommendedFoods } = coach;
     const menus = MENUS[category];
     const menusIndex = menus.map((_, index) => index);
 
     while (true) {
       const pickedMenu = menus[Random.shuffle(menusIndex)[0]];
 
-      if (
-        !(
-          dislikeFoods.includes(pickedMenu) ||
-          recommendedFoods.includes(pickedMenu)
-        )
-      ) {
+      if (!this.isValidMenu(pickedMenu, coach)) {
         recommendedFoods.push(pickedMenu);
         break;
       }
     }
+  }
+
+  isValidMenu(pickedMenu, { dislikeFoods, recommendedFoods }) {
+    return (
+      dislikeFoods.includes(pickedMenu) || recommendedFoods.includes(pickedMenu)
+    );
   }
 }
 

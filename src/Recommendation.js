@@ -1,6 +1,7 @@
-const { Random } = require('@woowacourse/mission-utils');
+const { Random, Console } = require('@woowacourse/mission-utils');
 const CATEGORY = require('./Category');
 const MENUS = require('./Menus');
+const OutputView = require('./OutputView');
 
 class Recommendation {
   constructor(coaches) {
@@ -9,11 +10,16 @@ class Recommendation {
     this.categoryCount = { 일식: 0, 한식: 0, 중식: 0, 아시안: 0, 양식: 0 };
   }
 
-  get() {
-    return [this.coaches, this.pickedCategory];
+  recommend() {
+    this.pick();
+
+    const ouputView = new OutputView();
+    const names = this.coaches.map((name) => name);
+    ouputView.printResult(names, this.pickedCategory, this.coaches);
+    Console.close();
   }
 
-  recommend() {
+  pick() {
     for (let i = 0; i < 5; i++) {
       const category = this.getCategory();
       this.pickedCategory.push(category);

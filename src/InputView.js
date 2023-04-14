@@ -1,6 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { INPUT_MESSAGE } = require('./Constants');
-const OutputView = require('./OutputView');
 const Recommendation = require('./Recommendation');
 const Validation = require('./Validation');
 
@@ -29,22 +28,9 @@ class InputView {
       coaches[index].dislikeFoods = foods;
 
       index === coaches.length - 1
-        ? this.recommandMenu(coaches)
+        ? new Recommendation(coaches).recommend()
         : this.readDislikeFood(coaches, ++index);
     });
-  }
-
-  recommandMenu(coaches) {
-    const recommendation = new Recommendation(coaches);
-    recommendation.recommend();
-
-    const [results, categories] = recommendation.get();
-
-    const ouputView = new OutputView();
-    const names = coaches.map((name) => name);
-    ouputView.printResult(names, categories, results);
-
-    Console.close();
   }
 }
 

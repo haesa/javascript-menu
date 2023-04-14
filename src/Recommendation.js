@@ -42,24 +42,17 @@ class Recommendation {
   }
 
   selectMenu(category, coach) {
-    const { dislikeFoods, recommendedFoods } = coach;
     const menus = MENUS[category];
     const menusIndex = Array.from({ length: 9 }, (_, idx) => idx);
 
     while (true) {
       const pickedMenu = menus[Random.shuffle(menusIndex)[0]];
 
-      if (!this.isValidMenu(pickedMenu, coach)) {
-        recommendedFoods.push(pickedMenu);
+      if (!coach.isValidMenu(pickedMenu)) {
+        coach.pushRecommendedMenu(pickedMenu);
         break;
       }
     }
-  }
-
-  isValidMenu(pickedMenu, { dislikeFoods, recommendedFoods }) {
-    return (
-      dislikeFoods.includes(pickedMenu) || recommendedFoods.includes(pickedMenu)
-    );
   }
 }
 

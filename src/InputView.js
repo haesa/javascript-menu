@@ -15,16 +15,16 @@ class InputView {
     });
   }
 
-  readDislikeFood(names, unlikeMenus, index) {
+  readDislikeFood(names, dislikeFoods, index) {
     Console.readLine(INPUT_MESSAGE.FOOD_NAME(names[index]), (input) => {
       const foods = input.split(',');
 
       Validation.food(foods);
-      unlikeMenus.push(foods);
+      dislikeFoods.push(foods);
 
       index === names.length - 1
-        ? this.recommandMenu(names, unlikeMenus)
-        : this.readDislikeFood(names, unlikeMenus, ++index);
+        ? this.recommandMenu(names, dislikeFoods)
+        : this.readDislikeFood(names, dislikeFoods, ++index);
     });
   }
 

@@ -1,12 +1,11 @@
-const { Console } = require('@woowacourse/mission-utils');
-const { SERVICE_MESSAGE } = require('./Constants');
+const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 
 class App {
   constructor() {}
 
   play() {
-    Console.print(SERVICE_MESSAGE.START);
+    OutputView.start();
     InputView.readCoachName();
   }
 }

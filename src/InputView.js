@@ -6,7 +6,7 @@ const Validation = require('./Validation');
 class InputView {
   constructor() {}
 
-  readCoachName() {
+  static readCoachName() {
     Console.readLine(INPUT_MESSAGE.COACH_NAME, (input) => {
       const names = input.split(',');
       Validation.coach(names);
@@ -15,11 +15,11 @@ class InputView {
         dislikeFoods: [],
         recommendedFoods: [],
       }));
-      this.readDislikeFood(coaches, 0);
+      InputView.readDislikeFood(coaches, 0);
     });
   }
 
-  readDislikeFood(coaches, index) {
+  static readDislikeFood(coaches, index) {
     Console.readLine(INPUT_MESSAGE.FOOD_NAME(coaches[index].name), (input) => {
       const foods = input.split(',');
 
@@ -29,7 +29,7 @@ class InputView {
 
       index === coaches.length - 1
         ? new Recommendation(coaches).recommend()
-        : this.readDislikeFood(coaches, ++index);
+        : InputView.readDislikeFood(coaches, ++index);
     });
   }
 }

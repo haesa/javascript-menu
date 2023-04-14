@@ -11,12 +11,11 @@ const SAMPLE = {
 };
 
 class App {
-  constructor() {
-    this.inputView = new InputView();
-  }
+  constructor() {}
+
   play() {
     Console.print(SERVICE_MESSAGE.START);
-    this.inputView.readCoachName();
+    InputView.readCoachName();
   }
 }
 

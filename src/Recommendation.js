@@ -15,7 +15,7 @@ class Recommendation {
 
   recommend() {
     const category = this.getCategory();
-    this.pickedCategory.push();
+    this.pickedCategory.push(category);
 
     this.coaches.forEach((coach) => this.selectMenu(category, coach));
   }
@@ -36,8 +36,8 @@ class Recommendation {
     const menusIndex = menus.map((menu, index) => index);
 
     while (true) {
-      const menuIndex = Random.shuffle(menusIndex)[0];
-      const pickedMenu = menus[menuIndex];
+      const pickedMenu = menus[Random.shuffle(menusIndex)[0]];
+
       if (
         !(
           dislikeFoods.includes(pickedMenu) ||

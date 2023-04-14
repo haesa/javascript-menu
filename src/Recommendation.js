@@ -1,4 +1,4 @@
-const { Random, Console } = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 const CATEGORY = require('./Category');
 const MENUS = require('./Menus');
 const OutputView = require('./OutputView');
@@ -44,7 +44,7 @@ class Recommendation {
   selectMenu(category, coach) {
     const { dislikeFoods, recommendedFoods } = coach;
     const menus = MENUS[category];
-    const menusIndex = menus.map((_, index) => index);
+    const menusIndex = Array.from({ length: 9 }, (_, idx) => idx);
 
     while (true) {
       const pickedMenu = menus[Random.shuffle(menusIndex)[0]];

@@ -57,8 +57,7 @@ class Recommendation {
       { length: menus.length },
       (_, idx) => idx + 1
     );
-    const shuffledArray = Random.shuffle(indexArray);
-    return shuffledArray.map((index) => menus[index - 1]);
+    return menus[Random.shuffle(indexArray)[0] - 1];
   }
 }
 

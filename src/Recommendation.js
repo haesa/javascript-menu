@@ -16,13 +16,16 @@ class Recommendation {
   }
 
   recommend() {
-    const category = this.getCategory();
-    this.category.push(category);
+    this.category.push(this.getCategory());
 
     for (let i = 0; i < this.recommendMenus.length; i++) {
       const recommendMenu = this.recommendMenus[i];
       const unlikeMenu = this.unlikeMenus[i];
-      this.recommendMenus[i] = this.selectMenu(category, recommendMenu, unlikeMenu);
+      this.recommendMenus[i] = this.selectMenu(
+        category,
+        recommendMenu,
+        unlikeMenu
+      );
     }
   }
 
@@ -44,7 +47,12 @@ class Recommendation {
     while (true) {
       const menuIndex = Random.shuffle(menusIndex)[0];
 
-      if (!(unlikeMenu.includes(menus[menuIndex]) || recommendMenu.includes(menus[menuIndex]))) {
+      if (
+        !(
+          unlikeMenu.includes(menus[menuIndex]) ||
+          recommendMenu.includes(menus[menuIndex])
+        )
+      ) {
         recommendMenu.push(menus[menuIndex]);
         break;
       }

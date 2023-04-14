@@ -8,18 +8,14 @@ class InputView {
   constructor() {}
 
   readCoachName() {
-    Console.readLine(INPUT_MESSAGE.COACH_NAME, (input) =>
-      this.createCoaches(input)
-    );
-  }
+    Console.readLine(INPUT_MESSAGE.COACH_NAME, (input) => {
+      const names = input.split(',');
+      const temp = [...names];
 
-  createCoaches(input) {
-    const names = input.split(',');
-    const temp = [...names];
+      Validation.coach(names);
 
-    Validation.coach(names);
-
-    this.readDislikeFood(temp, names, []);
+      this.readDislikeFood(temp, names, []);
+    });
   }
 
   readDislikeFood(temp, names, unlikeMenus) {

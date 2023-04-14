@@ -24,7 +24,7 @@ class Recommendation {
 
   getCategory() {
     while (true) {
-      const category = CATEGORY[Random.pickNumberInRange(1, 5)];
+      const category = CATEGORY[Random.pickNumberInRange(1, 5) - 1];
 
       if (this.categoryCount[category] < 2) {
         this.categoryCount[category] += 1;

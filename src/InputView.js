@@ -10,27 +10,21 @@ class InputView {
   readCoachName() {
     Console.readLine(INPUT_MESSAGE.COACH_NAME, (input) => {
       const names = input.split(',');
-      const temp = [...names];
-
       Validation.coach(names);
-
-      this.readDislikeFood(temp, names, []);
+      this.readDislikeFood(names, [], 0);
     });
   }
 
-  readDislikeFood(temp, names, unlikeMenus) {
-    Console.readLine(INPUT_MESSAGE.FOOD_NAME(temp.shift()), (input) => {
+  readDislikeFood(names, unlikeMenus, index) {
+    Console.readLine(INPUT_MESSAGE.FOOD_NAME(names[index]), (input) => {
       const foods = input.split(',');
 
       Validation.food(foods);
       unlikeMenus.push(foods);
 
-      if (temp.length) {
-        this.readDislikeFood(temp, names, unlikeMenus);
-        return;
-      }
-
-      this.recommandMenu(names, unlikeMenus);
+      index === names.length - 1
+        ? this.recommandMenu(names, unlikeMenus)
+        : this.readDislikeFood(names, unlikeMenus, ++index);
     });
   }
 

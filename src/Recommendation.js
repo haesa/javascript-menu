@@ -4,26 +4,29 @@ const MENUS = require('./Menus');
 const OutputView = require('./OutputView');
 
 class Recommendation {
+  #coaches;
+  #pickedCategory;
+  #categoryCount;
   constructor(coaches) {
-    this.coaches = coaches;
-    this.pickedCategory = [];
-    this.categoryCount = { 일식: 0, 한식: 0, 중식: 0, 아시안: 0, 양식: 0 };
+    this.#coaches = coaches;
+    this.#pickedCategory = [];
+    this.#categoryCount = { 일식: 0, 한식: 0, 중식: 0, 아시안: 0, 양식: 0 };
   }
 
   recommend() {
     this.pick();
 
-    const names = this.coaches.map((name) => name);
-    OutputView.printResult(names, this.pickedCategory, this.coaches);
+    const names = this.#coaches.map((name) => name);
+    OutputView.printResult(names, this.#pickedCategory, this.#coaches);
     Console.close();
   }
 
   pick() {
     for (let i = 0; i < 5; i++) {
       const category = this.getCategory();
-      this.pickedCategory.push(category);
+      this.#pickedCategory.push(category);
 
-      this.coaches.forEach((coach) => this.selectMenu(category, coach));
+      this.#coaches.forEach((coach) => this.selectMenu(category, coach));
     }
   }
 
@@ -31,8 +34,8 @@ class Recommendation {
     while (true) {
       const category = CATEGORY[Random.pickNumberInRange(1, 5) - 1];
 
-      if (this.categoryCount[category] < 2) {
-        this.categoryCount[category] += 1;
+      if (this.#categoryCount[category] < 2) {
+        this.#categoryCount[category] += 1;
         return category;
       }
     }

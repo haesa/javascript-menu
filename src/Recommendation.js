@@ -16,7 +16,8 @@ class Recommendation {
   }
 
   recommend() {
-    this.category.push(this.getCategory());
+    const category = this.getCategory();
+    this.category.push();
 
     for (let i = 0; i < this.recommendMenus.length; i++) {
       const recommendMenu = this.recommendMenus[i];

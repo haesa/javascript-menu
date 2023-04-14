@@ -1,12 +1,11 @@
 const { Random } = require('@woowacourse/mission-utils');
 const Category = require('./Category');
-const Menus = require('./Menus');
+const MENUS = require('./Menus');
 
 class Recommendation {
   constructor(recommendResult, unlikeMenus) {
     this.recommendMenus = recommendResult;
     this.unlikeMenus = unlikeMenus;
-    this.menus = new Menus();
     this.category = new Category();
     this.categoryCount = { 일식: 0, 한식: 0, 중식: 0, 아시안: 0, 양식: 0 };
   }
@@ -42,7 +41,7 @@ class Recommendation {
   }
 
   selectMenu(category, recommendMenu, unlikeMenu) {
-    const menus = this.menus.get(category).split(', ');
+    const menus = MENUS[category];
     const menusIndex = menus.map((menu, index) => index);
 
     while (true) {

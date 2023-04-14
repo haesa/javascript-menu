@@ -25,7 +25,8 @@ class InputView {
       const foods = input.split(',');
 
       Validation.food(foods);
-      coaches[index].dislikeFoods.push(foods);
+
+      coaches[index].dislikeFoods = foods;
 
       index === coaches.length - 1
         ? this.recommandMenu(coaches)

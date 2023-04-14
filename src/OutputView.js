@@ -4,7 +4,7 @@ const { SERVICE_MESSAGE } = require('./Constants');
 class OutputView {
   constructor() {}
 
-  printResult(names, categories, coaches) {
+  static printResult(names, categories, coaches) {
     Console.print(SERVICE_MESSAGE.RESULT);
     Console.print(SERVICE_MESSAGE.DAYS);
     Console.print(SERVICE_MESSAGE.CATEGORY(categories));

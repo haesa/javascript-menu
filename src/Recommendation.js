@@ -13,9 +13,8 @@ class Recommendation {
   recommend() {
     this.pick();
 
-    const ouputView = new OutputView();
     const names = this.coaches.map((name) => name);
-    ouputView.printResult(names, this.pickedCategory, this.coaches);
+    OutputView.printResult(names, this.pickedCategory, this.coaches);
     Console.close();
   }
 

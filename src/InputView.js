@@ -11,28 +11,30 @@ class InputView {
     Console.readLine(INPUT_MESSAGE.COACH_NAME, (input) => {
       const names = input.split(',');
       Validation.coach(names);
-      this.readDislikeFood(names, [], 0);
+      const coaches = names.map((name) => ({
+        name,
+        dislikeFoods: [],
+        recommendedFoods: [],
+      }));
+      this.readDislikeFood(coaches, 0);
     });
   }
 
-  readDislikeFood(names, dislikeFoods, index) {
-    Console.readLine(INPUT_MESSAGE.FOOD_NAME(names[index]), (input) => {
+  readDislikeFood(coaches, index) {
+    Console.readLine(INPUT_MESSAGE.FOOD_NAME(coaches[index].name), (input) => {
       const foods = input.split(',');
 
       Validation.food(foods);
-      dislikeFoods.push(foods);
+      coaches[index].dislikeFoods.push(foods);
 
-      index === names.length - 1
-        ? this.recommandMenu(names, dislikeFoods)
-        : this.readDislikeFood(names, dislikeFoods, ++index);
+      index === coaches.length - 1
+        ? this.recommandMenu(coaches)
+        : this.readDislikeFood(coaches, ++index);
     });
   }
 
-  recommandMenu(names, dislikeFoods) {
-    const recommendLists = Array.from({ length: dislikeFoods.length }, () =>
-      Array.from({ length: 0 })
-    );
-    const recommendation = new Recommendation(recommendLists, dislikeFoods);
+  recommandMenu(coaches) {
+    const recommendation = new Recommendation(coaches);
 
     for (let i = 0; i < 5; i++) {
       recommendation.recommend();
@@ -41,6 +43,7 @@ class InputView {
     const [results, categories] = recommendation.get();
 
     const ouputView = new OutputView();
+    const names = coaches.map((name) => name);
     ouputView.printResult(names, categories, results);
 
     Console.close();

@@ -3,30 +3,21 @@ const CATEGORY = require('./Category');
 const MENUS = require('./Menus');
 
 class Recommendation {
-  constructor(recommendResult, unlikeMenus) {
-    this.recommendMenus = recommendResult;
-    this.unlikeMenus = unlikeMenus;
+  constructor(coaches) {
+    this.coaches = coaches;
     this.pickedCategory = [];
     this.categoryCount = { 일식: 0, 한식: 0, 중식: 0, 아시안: 0, 양식: 0 };
   }
 
   get() {
-    return [this.recommendMenus, this.pickedCategory];
+    return [this.coaches, this.pickedCategory];
   }
 
   recommend() {
     const category = this.getCategory();
     this.pickedCategory.push();
 
-    for (let i = 0; i < this.recommendMenus.length; i++) {
-      const recommendMenu = this.recommendMenus[i];
-      const unlikeMenu = this.unlikeMenus[i];
-      this.recommendMenus[i] = this.selectMenu(
-        category,
-        recommendMenu,
-        unlikeMenu
-      );
-    }
+    this.coaches.forEach((coach) => this.selectMenu(category, coach));
   }
 
   getCategory() {
@@ -40,25 +31,23 @@ class Recommendation {
     }
   }
 
-  selectMenu(category, recommendMenu, unlikeMenu) {
+  selectMenu(category, { dislikeFoods, recommendedFoods }) {
     const menus = MENUS[category];
     const menusIndex = menus.map((menu, index) => index);
 
     while (true) {
       const menuIndex = Random.shuffle(menusIndex)[0];
-
+      const pickedMenu = menus[menuIndex];
       if (
         !(
-          unlikeMenu.includes(menus[menuIndex]) ||
-          recommendMenu.includes(menus[menuIndex])
+          dislikeFoods.includes(pickedMenu) ||
+          recommendedFoods.includes(pickedMenu)
         )
       ) {
-        recommendMenu.push(menus[menuIndex]);
+        recommendedFoods.push(pickedMenu);
         break;
       }
     }
-
-    return recommendMenu;
   }
 }
 

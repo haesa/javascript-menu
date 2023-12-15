@@ -16,6 +16,10 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.recommendationCompleted);
   },
 
+  printErrorMessage(error) {
+    Console.print(error.message);
+  },
+
   printNewLine() {
     Console.print('');
   },

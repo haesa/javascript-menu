@@ -1,11 +1,7 @@
 import { CATEGORY } from '../constants/index.js';
 
 class Category {
-  #categories;
-
-  constructor(categories) {
-    this.#categories = categories;
-  }
+  #categories = [];
 
   static pick(number) {
     return CATEGORY.category[number];

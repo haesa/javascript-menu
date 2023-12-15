@@ -1,14 +1,79 @@
-const SAMPLE = {
-  일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
-  한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
-  중식: '깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채',
-  아시안:
-    '팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜',
-  양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
-};
+import { Random } from '@woowacourse/mission-utils';
+import Category from './Domain/Category.js';
+import InputView from './View/InputView.js';
+import OutputView from './View/OutputView.js';
+import Recommendation from './Domain/Recommendation.js';
 
 class App {
-  play() {}
+  #coaches = [];
+  #category = [];
+
+  async play() {
+    OutputView.printStartMessage();
+    this.#coaches = await this.readData();
+    this.recommendMenu();
+    OutputView.printResult(this.#coaches, this.#category);
+  }
+
+  async readData() {
+    const names = await this.readCoachName();
+    return await names.reduce(
+      (promise, name) =>
+        promise.then(async (data) => {
+          const avoidedFoodList = await this.readAvoidedFood(name);
+          return [...data, { name, menus: [], avoidedFoodList }];
+        }),
+      Promise.resolve([])
+    );
+  }
+
+  async readCoachName() {
+    try {
+      return await InputView.readCoachName();
+    } catch (error) {
+      OutputView.printErrorMessage(error);
+      return await this.readCoachName();
+    }
+  }
+
+  async readAvoidedFood(name) {
+    try {
+      return await InputView.readAvoidedFood(name);
+    } catch (error) {
+      OutputView.printErrorMessage(error);
+      return await this.readAvoidedFood();
+    }
+  }
+
+  recommendMenu() {
+    const categoryManager = new Category();
+    for (let day = 0; day < 5; day += 1) {
+      const category = this.pickCategory(categoryManager);
+      this.#coaches = this.#coaches.map((coach) =>
+        App.selectMenu(coach, category)
+      );
+    }
+  }
+
+  pickCategory(categoryManager) {
+    let pickedCategory;
+    do {
+      pickedCategory = Category.pick(Random.pickNumberInRange(1, 5));
+    } while (!categoryManager.canSelectCategory(pickedCategory));
+    this.#category = categoryManager.pushCategory(pickedCategory);
+    return pickedCategory;
+  }
+
+  static selectMenu(coach, category) {
+    let menu;
+    do {
+      menu = Recommendation.pickMenu(category);
+    } while (
+      !Recommendation.isFoodSafe(coach, menu) ||
+      Recommendation.hasMenu(coach, menu)
+    );
+    return { ...coach, menus: [...coach.menus, menu] };
+  }
 }
 
 export default App;

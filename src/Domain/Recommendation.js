@@ -3,15 +3,12 @@ import { MENU } from '../constants/index.js';
 
 class Recommendation {
   static pickMenu(category) {
-    const menuIndex = Recommendation.#shuffleMenu(MENU[category]);
+    const menuIndex = Recommendation.#shuffleMenu();
     return MENU[category][menuIndex];
   }
 
-  static #shuffleMenu(menus) {
-    const indexArray = Array.from(
-      { length: menus.length },
-      (_, index) => index
-    );
+  static #shuffleMenu() {
+    const indexArray = Array.from({ length: 9 }, (_, index) => index);
     return Random.shuffle(indexArray)[0];
   }
 

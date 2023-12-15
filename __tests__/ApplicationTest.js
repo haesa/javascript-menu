@@ -58,28 +58,19 @@ describe('점심 메뉴 테스트', () => {
 
       const sequenced = (_, idx) => idx + 1;
       mockShuffles([
-        // 월
-        [1, Array.from({ length: 9 }, sequenced)],
-        [8, Array.from({ length: 9 }, sequenced)],
-
-        // 화
-        [6, Array.from({ length: 9 }, sequenced)],
-        [0, Array.from({ length: 9 }, sequenced)],
-
-        // 수
-        [0, Array.from({ length: 9 }, sequenced)],
-        [4, Array.from({ length: 9 }, sequenced)],
-
-        // 목
-        [3, Array.from({ length: 9 }, sequenced)],
-        [4, Array.from({ length: 9 }, sequenced)],
-
-        // 금
-        [1, Array.from({ length: 9 }, sequenced)],
-        [3, Array.from({ length: 9 }, sequenced)],
-
         // 구구
+        [2, Array.from({ length: 9 }, sequenced)],
+        [7, Array.from({ length: 9 }, sequenced)],
+        [1, Array.from({ length: 9 }, sequenced)],
+        [4, Array.from({ length: 9 }, sequenced)],
+        [2, Array.from({ length: 9 }, sequenced)],
+
         //제임스
+        [9, Array.from({ length: 9 }, sequenced)],
+        [1, Array.from({ length: 9 }, sequenced)],
+        [5, Array.from({ length: 9 }, sequenced)],
+        [5, Array.from({ length: 9 }, sequenced)],
+        [4, Array.from({ length: 9 }, sequenced)],
       ]);
 
       const app = new App();

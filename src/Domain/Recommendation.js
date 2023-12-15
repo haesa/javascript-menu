@@ -4,11 +4,11 @@ import { MENU } from '../constants/index.js';
 class Recommendation {
   static pickMenu(category) {
     const menuIndex = Recommendation.#shuffleMenu();
-    return MENU[category][menuIndex];
+    return MENU[category][menuIndex - 1];
   }
 
   static #shuffleMenu() {
-    const indexArray = Array.from({ length: 9 }, (_, index) => index);
+    const indexArray = Array.from({ length: 9 }, (_, index) => index + 1);
     return Random.shuffle(indexArray)[0];
   }
 

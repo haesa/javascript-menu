@@ -11,6 +11,7 @@ class App {
   async play() {
     OutputView.printStartMessage();
     this.#coaches = await this.readData();
+    this.pickCategory();
     this.recommendMenu();
     OutputView.printResult(this.#coaches, this.#category);
   }
@@ -45,23 +46,28 @@ class App {
     }
   }
 
-  recommendMenu() {
+  pickCategory() {
     const categoryManager = new Category();
-    for (let day = 0; day < 5; day += 1) {
-      const category = this.pickCategory(categoryManager);
-      this.#coaches = this.#coaches.map((coach) =>
-        App.selectMenu(coach, category)
-      );
+
+    while (this.#category.length < 5) {
+      const pickedCategory = Category.pick(Random.pickNumberInRange(1, 5));
+      if (categoryManager.canSelectCategory(pickedCategory)) {
+        this.#category = categoryManager.pushCategory(pickedCategory);
+      }
     }
   }
 
-  pickCategory(categoryManager) {
-    let pickedCategory;
-    do {
-      pickedCategory = Category.pick(Random.pickNumberInRange(1, 5));
-    } while (!categoryManager.canSelectCategory(pickedCategory));
-    this.#category = categoryManager.pushCategory(pickedCategory);
-    return pickedCategory;
+  recommendMenu() {
+    this.#coaches = this.#coaches.map((coach) =>
+      this.getWeeklyRecommendation(coach)
+    );
+  }
+
+  getWeeklyRecommendation(coach) {
+    return this.#category.reduce(
+      (result, category) => App.selectMenu(result, category),
+      coach
+    );
   }
 
   static selectMenu(coach, category) {

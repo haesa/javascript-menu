@@ -1,8 +1,9 @@
 # 🚀 기능 목록
 
-- 카테고리 무작위 추천 기능 - `pickCategory()`
-  - 같은 카테고리는 최대 2회까지 가능
-- 메뉴 추천 기능 - `recommendMenu()`
+- 카테고리 뽑는 기능 - `pick()`
+- 뽑을 수 있는 카테고리인지 확인하는 기능 - `canSelectCategory()`
+- 선택된 카테고리 배열에 새로운 카테고리 추가하는 기능 - `pushCategory()`
+- 메뉴 추천 기능 - `recommendMenu(category, coach)`
   - 카테고리에 맞는 1가지 메뉴를 뽑는 기능 - `pickMenu()`
   - 못 먹는 음식인지 확인하는 기능 - `isFoodSafe()`
   - 이미 추천한 메뉴인지 확인하는 기능 - `hasMenu()`

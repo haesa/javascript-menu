@@ -15,8 +15,8 @@ class Recommendation {
     return Random.shuffle(indexArray)[0];
   }
 
-  static isFoodSafe({ avoidedFoodsArray }, menu) {
-    return !avoidedFoodsArray.includes(menu);
+  static isFoodSafe({ avoidedFoodList }, menu) {
+    return !avoidedFoodList.includes(menu);
   }
 
   static hasMenu({ menus }, menu) {

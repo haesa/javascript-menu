@@ -11,7 +11,7 @@ describe('Recommendation 클래스 테스트', () => {
     const coach = {
       name: 'pobi',
       menus: ['김밥', '우동'],
-      avoidedFoodsArray: ['깐풍기'],
+      avoidedFoodList: ['깐풍기'],
     };
     expect(Recommendation.isFoodSafe(coach, '오코노미야끼')).toBe(true);
     expect(Recommendation.isFoodSafe(coach, '깐풍기')).toBe(false);
@@ -21,7 +21,7 @@ describe('Recommendation 클래스 테스트', () => {
     const coach = {
       name: 'pobi',
       menus: ['김밥', '우동'],
-      avoidedFoodsArray: ['깐풍기'],
+      avoidedFoodList: ['깐풍기'],
     };
     expect(Recommendation.hasMenu(coach, '김밥')).toBe(true);
     expect(Recommendation.hasMenu(coach, '쌀국수')).toBe(false);

@@ -1,4 +1,4 @@
-const CATEGORY = {
+const CATEGORY = Object.freeze({
   get: {
     1: '일식',
     2: '한식',
@@ -6,6 +6,6 @@ const CATEGORY = {
     4: '아시안',
     5: '양식',
   },
-};
+});
 
 export default CATEGORY;

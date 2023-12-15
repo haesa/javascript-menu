@@ -1,5 +1,5 @@
 const CATEGORY = Object.freeze({
-  get: {
+  category: {
     1: '일식',
     2: '한식',
     3: '중식',

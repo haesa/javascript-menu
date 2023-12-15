@@ -8,7 +8,7 @@ class Category {
   }
 
   static pick(number) {
-    return CATEGORY.get[number];
+    return CATEGORY.category[number];
   }
 
   canSelectCategory(pickCategory) {

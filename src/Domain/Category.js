@@ -1,4 +1,4 @@
-import CATEGORY from '../constants/index.js';
+import { CATEGORY } from '../constants/index.js';
 
 class Category {
   #categories;
